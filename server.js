@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const Connection = require('mysql2/typings/mysql/lib/Connection');
 const db = require('./db/connection');
 
 const starterQuestion = () => {
@@ -43,6 +44,11 @@ const starterQuestion = () => {
     })
 };
 
+function viewAllDepartments() {
+    connection.query("SELECT employee.FirstName, employee.LastName, department.name,")
+}
+
+
 function addEmployee() {
 inquirer.prompt([
     {
@@ -54,11 +60,11 @@ inquirer.prompt([
         type: "input",
         message: "Enter Last Name"
     }, {
-        name: "role",
+        name: "roleID",
         type: "input",
         message: "Enter Role"
     }, {
-        name: "choices",
+        name: "managerID",
         type: "list",
         message: "Enter Manager's Name",
         choices: selectManager()
@@ -83,7 +89,7 @@ function addRoles() {
 function addDepartment() {
     inquirer.prompt([
         {
-            name: "name",
+            name: "departmentId",
             type: "input",
             message: "Add Department"
         }
