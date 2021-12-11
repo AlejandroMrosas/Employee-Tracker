@@ -9,13 +9,13 @@ CREATE TABLE department(
 );
 
 CREATE TABLE role (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     title VARCHAR(25) NOT NULL,
     Salary DECIMAL NOT NULL,
     departmentId INT NOT NULL,
     INDEX depInd (departmentId),
-    CONSTRAINT fkDept FOREIGN KEY (departmentId) REFERENCES department(id)
-)
+    FOREIGN KEY (departmentId) REFERENCES department(id)
+);
 
 CREATE TABLE employee (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,4 +27,4 @@ CREATE TABLE employee (
     CONSTRAINT fkRole FOREIGN KEY (roleId) REFERENCES role(id)
     INDEX manInd (managerId),
     CONSTRAINT fkRole FOREIGN KEY (managerId) REFERENCES employee(id)
-)
+);

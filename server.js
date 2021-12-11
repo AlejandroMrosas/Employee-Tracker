@@ -1,9 +1,6 @@
 const inquirer = require('inquirer');
-const Connection = require('mysql2/typings/mysql/lib/Connection');
-const db = require('./db/connection');
 
-const starterQuestion = () => {
-    inquirer.prompt ([
+const starterQuestion = [
         {
                 type: 'list',
                 name: 'choices',
@@ -17,8 +14,56 @@ const starterQuestion = () => {
                     'add an employee', 
                     'update an employee role']
         }
-    ]).then((answer) => {
-        switch(answer.choices) {
+    ];
+
+const addEmployee = [
+    {
+        name: "FirstName",
+        type: "input",
+        message: "Enter employees first name."
+    }, {
+        name: "LastName",
+        type: "input",
+        message: "Enter Last Name"
+    }, {
+        name: "roleID",
+        type: "input",
+        message: "Enter Role"
+    }, {
+        name: "managerID",
+        type: "list",
+        message: "Enter Manager's Name",
+    }
+];
+
+const addRoles = [
+        {
+         name: "title",
+         type: "input",
+         message: "What is the Role?"   
+        }, {
+            name: "Salary",
+            type: "input",
+            message: "Enter Salary"
+        }
+    ];
+
+const addDepartment = [
+        {
+            name: "departmentId",
+            type: "input",
+            message: "Add Department"
+        }
+    ];
+
+    const choices = starterQuestion.concat(addEmployee, addRoles, addDepartment);
+
+    inquirer.prompt(choices).then((answers) => {
+        return JSON.stringify(answers)
+      }).then(results => {
+          console.log(`choices  ${results.choices}`);
+    
+          switch(results.choices){
             case 'View all departments':
             viewAllDepartments();
             break;
@@ -42,60 +87,6 @@ const starterQuestion = () => {
             break;
         }
     })
-};
-
-function viewAllDepartments() {
-    connection.query("SELECT employee.FirstName, employee.LastName, department.name,")
-}
-
-
-function addEmployee() {
-inquirer.prompt([
-    {
-        name: "FirstName",
-        type: "input",
-        message: "Enter employees first name."
-    }, {
-        name: "LastName",
-        type: "input",
-        message: "Enter Last Name"
-    }, {
-        name: "roleID",
-        type: "input",
-        message: "Enter Role"
-    }, {
-        name: "managerID",
-        type: "list",
-        message: "Enter Manager's Name",
-        choices: selectManager()
-    }
-])
-}
-
-function addRoles() {
-    inquirer.prompt([
-        {
-         name: "title",
-         type: "input",
-         message: "What is the Role?"   
-        }, {
-            name: "Salary",
-            type: "input",
-            message: "Enter Salary"
-        }
-    ])
-}
-
-function addDepartment() {
-    inquirer.prompt([
-        {
-            name: "departmentId",
-            type: "input",
-            message: "Add Department"
-        }
-    ])
-}
-
 
 
 // THEN I am presented with a formatted table showing department names and department ids
