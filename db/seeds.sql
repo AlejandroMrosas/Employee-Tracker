@@ -1,13 +1,18 @@
-INSERT INTO department
-  (id, first_name, last_name, title, departments, salary, manager);
+/* Department Values */
+INSERT INTO department (name)
+ 
 VALUES
-  (1, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (2, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (3, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (4, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (5, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (6, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
-  (7, 'Alex', 'Rosas', 'Administrator', 'Electranic', '120000', 'Alejandro'),
+  
+/* Employee Values */
+  INSERT INTO employee (FirstName, LastName, roleID, managerId)
+
+  VALUES
+
+/* Employee Values */
+  INSERT INTO role (id, title, salary)
+  
+  VALUES
+
 
 
 -- THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to

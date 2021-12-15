@@ -1,4 +1,8 @@
 const inquirer = require('inquirer');
+const mysql = require('mysql2');
+const db = require('./db/connection')
+require('console.table');
+
 
 const starterQuestion = [
         {
@@ -58,36 +62,86 @@ const addDepartment = [
 
     const choices = starterQuestion.concat(addEmployee, addRoles, addDepartment);
 
-    inquirer.prompt(choices).then((answers) => {
-        return JSON.stringify(answers)
-      }).then(results => {
-          console.log(`choices  ${results.choices}`);
-    
-          switch(results.choices){
-            case 'View all departments':
+    inquirer.prompt(starterQuestion).then((answers) => {
+          console.log(answers);
+          switch(answers.choices){
+            case 'view all departments':
             viewAllDepartments();
             break;
-            case 'View all roles':
+            case 'view all roles':
             viewAllRoles();
             break;
-            case 'View all employees':
+            case 'view all employees':
             viewAllemployees();
             break;
-            case 'Add a department':
+            case 'add a department':
             addADepartment();
             break;
-            case 'Add a role':
+            case 'add a role':
             addARoles();
             break;
-            case 'Add an employee':
+            case 'add an employee':
             addAnEmployee();
             break;
-            case 'Update an employee role':
-            UpdateAnEmloyeeRole();
+            case 'update an employee role':
+            updateAnEmloyeeRole();
+            break;
+            default: 
+            console.log("invalid");
             break;
         }
     })
 
+
+    function viewAllDepartments() {
+        db.query("SELECT * FROM department", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+
+    function viewAllRoles() {
+        db.query("SELECT * FROM role", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+
+    function viewAllemployees() {
+        db.query("SELECT * FROM employee", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+
+    function addADepartment() {
+        db.query("INSERT INTO department (name) VALUES ()", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+
+    function addARoles() {
+        db.query("INSERT INTO department (role) VALUES ()", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+
+    function addAnEmployee(){
+        db.query("INSERT INTO employee (FirstName, LastName, role) VALUES ()", function(err, choices) {
+            if (err)
+            throw err;
+            console.table(choices);
+        })
+    }
+    
+    
 
 // THEN I am presented with a formatted table showing department names and department ids
 // WHEN I choose to view all roles
