@@ -35,7 +35,7 @@ const addEmployee = [
         message: "Enter Role"
     }, {
         name: "managerID",
-        type: "list",
+        type: "input",
         message: "Enter Manager's Name",
     }
 ];
@@ -81,7 +81,11 @@ const addDepartment = [
             addARoles();
             break;
             case 'add an employee':
-            addAnEmployee();
+            
+            inquirer.prompt(addEmployee).then((answers) => {
+                console.log(answers);
+                addAnEmployee(employeeInfo);
+            });
             break;
             case 'update an employee role':
             updateAnEmloyeeRole();
@@ -90,7 +94,7 @@ const addDepartment = [
             console.log("invalid");
             break;
         }
-    })
+    });
 
 
     function viewAllDepartments() {
@@ -99,7 +103,7 @@ const addDepartment = [
             throw err;
             console.table(choices);
         })
-    }
+    };
 
     function viewAllRoles() {
         db.query("SELECT * FROM role", function(err, choices) {
@@ -107,7 +111,7 @@ const addDepartment = [
             throw err;
             console.table(choices);
         })
-    }
+    };
 
     function viewAllemployees() {
         db.query("SELECT * FROM employee", function(err, choices) {
@@ -115,7 +119,7 @@ const addDepartment = [
             throw err;
             console.table(choices);
         })
-    }
+    };
 
     function addADepartment() {
         db.query("INSERT INTO department (name) VALUES ()", function(err, choices) {
@@ -123,7 +127,7 @@ const addDepartment = [
             throw err;
             console.table(choices);
         })
-    }
+    };
 
     function addARoles() {
         db.query("INSERT INTO department (role) VALUES ()", function(err, choices) {
@@ -131,15 +135,16 @@ const addDepartment = [
             throw err;
             console.table(choices);
         })
-    }
+    };
 
-    function addAnEmployee(){
-        db.query("INSERT INTO employee (FirstName, LastName, role) VALUES ()", function(err, choices) {
-            if (err)
-            throw err;
-            console.table(choices);
-        })
-    }
+    function addAnEmployee(employeeInfo){
+        return db.query("INSERT INTO employee SET ?,?,?,?", employeeInfo)
+        // db.query("INSERT INTO employee (FirstName, LastName, roleID, managerId) VALUES ()", function(err, choices) {
+        //     if (err)
+        //     throw err;
+        //     console.table(choices);
+        // })
+    };
     
     
 
