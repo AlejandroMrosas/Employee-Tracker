@@ -75,10 +75,18 @@ const addDepartment = [
             viewAllemployees();
             break;
             case 'add a department':
-            addADepartment();
+                inquirer.prompt(addDepartment).then((answers) => {
+                    console.log(answers);
+                    addADepartment();
+                })
+            
             break;
             case 'add a role':
-            addARoles();
+                inquirer.prompt(addRoles).then((answers) => {
+                    console.log(answers);
+                    addARoles();
+                })
+            
             break;
             case 'add an employee':
             
