@@ -1,17 +1,17 @@
 /* Department Values */
 INSERT INTO department (name)
  
-VALUES
+VALUES();
   
 /* Employee Values */
   INSERT INTO employee (FirstName, LastName, roleID, managerId)
 
-  VALUES
+  VALUES();
 
 /* Employee Values */
   INSERT INTO role (id, title, salary)
   
-  VALUES
+  VALUES('');
 
 
 
